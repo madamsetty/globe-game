@@ -92,6 +92,7 @@
               <HapticButton>{{ overlayData?.optionD }}</HapticButton>
             </div>
           </div>
+                  </div>
           <div class="media">
             <template v-if="isYouTube(overlayData.mediaUrl)">
               <iframe
@@ -100,7 +101,7 @@
                 :src="getYouTubeEmbedUrl(overlayData.mediaUrl)"
                 title="YouTube video player"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="autoplay; encrypted-media"
                 allowfullscreen
               ></iframe>
             </template>
@@ -111,7 +112,6 @@
               <img :src="getImageSrc(overlayData.mediaUrl)" :alt="overlayData.title" />
             </template>
           </div>   
-        </div>
       </div>
     </div>
   </div>
@@ -131,7 +131,6 @@ const cleanup = setupGlobeScene(container, {
   addDefaultMarkers: true,
   enableInteraction: true,
   onMarkerClick: (markerData) => {
-    console.log('Clicked marker:', markerData.name);
     // Handle marker click (show quiz, info, etc.)
   }
 });

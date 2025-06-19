@@ -288,10 +288,9 @@ export function useAppLogic() {
 
   async function openSphereOverlay(city, languageCode) {
     try {
-      const response = await fetch(`/data/${languageCode}-quiz.json`);
+      const response = await fetch(`${import.meta.env.BASE_URL}data/${languageCode}-quiz.json`);
       const data = await response.json();
-      console.log(data);
-      console.log("city title:", data[city].title);
+
       if (data[city]) {
         overlayData.value = {
           title: data[city].title || '',
@@ -319,26 +318,20 @@ export function useAppLogic() {
   }
 
   function isYouTube(url) {
-    console.log("isYouTube():", url);
     return /youtu\.?be/.test(url);
   }
 
-  function getYouTubeEmbedUrl(url) {
-    console.log("getYouTubeEmbedUrl():", url);
-    const videoId = extractYouTubeId(url);
-    return `https://www.youtube.com/embed/${videoId}`;
+  function getYouTubeEmbedUrl(mediaUrl) {
+    const videoId = extractYouTubeId(mediaUrl);
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&mute=1`;
   }
 
   function extractYouTubeId(url) {
-    console.log("extractYouTubeId():", url);
-    const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[1].length === 11 ? match[1] : null;
+    const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]+)/);
+    return match ? match[1] : '';
   }
 
   function getImageSrc(url) {
-    console.log("getImageSrc():", url);
-
     if (!url || typeof url !== 'string') {
       console.warn("Invalid image URL:", url);
       return '';
@@ -346,13 +339,11 @@ export function useAppLogic() {
 
     // If it's a full URL (http or https), return it directly
     if (/^https?:\/\//.test(url)) {
-      console.log("External image URL:", url);
       return url;
     }
 
     // Assume it's a filename in /public/img/
     const localUrl = `img/${url}`;
-    console.log("Local image URL:", localUrl);
     return localUrl;
   }
 
@@ -373,7 +364,6 @@ export function useAppLogic() {
       enableInteraction: true,
       earthTexture: assets.earthTextureUrl,
       onMarkerClick: (markerData) => {
-        console.log('Marker clicked:', markerData);
         openSphereOverlay(markerData.name, currentLanguage.value);
       }
     });    
@@ -388,7 +378,6 @@ export function useAppLogic() {
   });
 
   onBeforeUnmount(() => {
-    console.log('Component unmounting');
     clearTimeout(idleTimer);
     
     // Cleanup Three.js resources

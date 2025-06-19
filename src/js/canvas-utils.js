@@ -19,8 +19,8 @@ const MAX_SCENE_ZOOM_CLOSER = 19;
 const MAX_SCENE_ZOOM_FAR = 26;
 const CONSTANT_SPHERE_ROTATION_SPEED = 0.0015;
 const SWIPE_DISTANCE_THRESHOLD = 200;
-const SWIPE_ACTION_DURATION_THRESHOLD_MS = 150;
-const TYPICAL_CLICK_DURATION_MS = 100;
+const SWIPE_ACTION_DURATION_THRESHOLD_MS = 300;
+const TYPICAL_CLICK_DURATION_MS = 75;
 
 // Performance optimization constants
 const TARGET_FPS = 60;
@@ -47,7 +47,6 @@ export function createGlobeScene(container, options = {}) {
 
   // Validate container
   if (!container && typeof DEBUG !== 'undefined' && DEBUG) {
-    console.error('❌ No container provided to createGlobeScene');
     return { cleanup: () => {} };
   }
 
@@ -189,7 +188,7 @@ export function createGlobeScene(container, options = {}) {
 
   // Optimized event handlers
   function onSwipeStart(event) {
-    if (slowingDown) {
+    if (slowingDown) {      
       isSwiping = false;
       swipeDistance = 1;
       targetRotationSpeed = CONSTANT_SPHERE_ROTATION_SPEED;
@@ -229,7 +228,7 @@ export function createGlobeScene(container, options = {}) {
         Math.abs(swipeDistance) > SWIPE_DISTANCE_THRESHOLD && 
         swipeActionDuration < SWIPE_ACTION_DURATION_THRESHOLD_MS && 
         swipeActionDuration > TYPICAL_CLICK_DURATION_MS) {
-      targetRotationSpeed = swipeDistance * 0.0007; // Reduced multiplier
+      targetRotationSpeed = swipeDistance * 0.005; // Reduced multiplier
       slowingDown = true;
     } else {
       targetRotationSpeed = CONSTANT_SPHERE_ROTATION_SPEED;
@@ -267,44 +266,41 @@ export function createGlobeScene(container, options = {}) {
     container.addEventListener('touchend', onSwipeEnd, { passive: true });
   }
 
-  // Highly optimized animation loop
   let animationId;
   const targetFrameTime = 1000 / TARGET_FPS;
   let accumulator = 0;
 
-  function animate(currentTime) {
+  function animate(currentTime) {    
     animationId = requestAnimationFrame(animate);
 
+    if(!rotateSphere) return;
+    
     const deltaTime = currentTime - lastTime;
     lastTime = currentTime;
     accumulator += deltaTime;
 
+    // Optional: log metrics
     updatePerformanceMetrics(currentTime);
 
-    while (accumulator >= targetFrameTime) {
-      // Decay target speed if swiping stopped
-      if (slowingDown) {
-        targetRotationSpeed *= 0.97;
-        if (Math.abs(targetRotationSpeed) <= CONSTANT_SPHERE_ROTATION_SPEED) {
-          targetRotationSpeed = CONSTANT_SPHERE_ROTATION_SPEED;
-          slowingDown = false;
-        }
+    // Only slow down if still above the constant speed
+    if (slowingDown) {
+      targetRotationSpeed *= 0.9; // Damping factor
+      if (targetRotationSpeed <= CONSTANT_SPHERE_ROTATION_SPEED) {
+        targetRotationSpeed = CONSTANT_SPHERE_ROTATION_SPEED;
+        slowingDown = false;
       }
-      accumulator -= targetFrameTime;
     }
 
-    // Smooth interpolate speed every frame
+    // Smooth interpolation
     const smoothingFactor = Math.min(0.25, deltaTime / 1000);
     sphereRotationSpeed = lerp(sphereRotationSpeed, targetRotationSpeed, smoothingFactor);
-    
     if (Math.abs(sphereRotationSpeed) < 0.00001) sphereRotationSpeed = 0;
 
-    if (rotateSphere || slowingDown) {
-      group.rotation.y += sphereRotationSpeed;
-    }
+    // Rotate sphere
+    group.rotation.y += sphereRotationSpeed;
 
+    // Controls & rendering
     if (controls) controls.update();
-
     if (composer && usePostProcessing) {
       composer.render();
     } else {
@@ -312,7 +308,7 @@ export function createGlobeScene(container, options = {}) {
     }
   }
 
-  animate(performance.now());
+animate(performance.now());
 
   // Public API
   return {

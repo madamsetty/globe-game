@@ -1,0 +1,20 @@
+{
+  "title": "Landningssida",
+  "touchSwipeHint": "Pekskärm för att spela",
+  "selectLanguage": "Välj språk",
+  "info": "Information",
+  "settings": "Inställningar",
+  "infoTitle": "Information",
+  "infoContent": "Detta är en interaktiv landningssida med en 3D-sfär. Rör musen eller rör skärmen för att interagera med gränssnittet. Efter 5 sekunder av inaktivitet kommer menyn att expandera.",
+  "settingsTitle": "Inställningar",
+  "settingsContent": "Konfigurera dina preferenser här. Du kan justera olika alternativ för att anpassa din upplevelse.",
+  "sphereTitle": "Sfärinformation",
+  "sphereQuestion": "Vad är denna sfär?",
+  "sphereDescription": "Detta är en interaktiv 3D-sfär renderad med Three.js. Den roterar kontinuerligt och reagerar på användarinteraktioner.",
+  "sphereDetails": "Klicka på sfären för att lära dig mer om dess egenskaper och beteende.",
+  "sphereImageAlt": "Frågebild för quiz",
+  "optionA": "Alternativ A",
+  "optionB": "Alternativ B",
+  "optionC": "Alternativ C",
+  "optionD": "Alternativ D"
+}

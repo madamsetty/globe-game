@@ -1,0 +1,20 @@
+{
+  "title": "Aloitussivu",
+  "touchSwipeHint": "Kosketusnäyttö pelataksesi",
+  "selectLanguage": "Valitse kieli",
+  "info": "Tiedot",
+  "settings": "Asetukset",
+  "infoTitle": "Tiedot",
+  "infoContent": "Tämä on interaktiivinen aloitussivu 3D-pallolla. Liikuta hiirtä tai kosketa näyttöä vuorovaikutukseen käyttöliittymän kanssa. 5 sekunnin toimettomuuden jälkeen valikko laajenee.",
+  "settingsTitle": "Asetukset",
+  "settingsContent": "Määritä mieltymyksesi täällä. Voit säätää erilaisia vaihtoehtoja kokemuksesi räätälöimiseksi.",
+  "sphereTitle": "Pallon tiedot",
+  "sphereQuestion": "Mikä tämä pallo on?",
+  "sphereDescription": "Tämä on interaktiivinen 3D-pallo, joka on renderöity Three.js:llä. Se pyörii jatkuvasti ja reagoi käyttäjän toimintoihin.",
+  "sphereDetails": "Klikkaa palloa oppiaksesi lisää sen ominaisuuksista ja käyttäytymisestä.",
+  "sphereImageAlt": "Tietokilpailun kysymyskuva",
+  "optionA": "Vaihtoehto A",
+  "optionB": "Vaihtoehto B",
+  "optionC": "Vaihtoehto C",
+  "optionD": "Vaihtoehto D"
+}

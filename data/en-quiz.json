@@ -1,0 +1,24 @@
+{
+  "Delhi": {
+    "title": "Delhi",
+    "question": "What is the capital of India?",
+    "description": "Delhi is one of the oldest cities in the world, rich in history and culture.",
+    "details": "It is the capital territory of India and includes New Delhi, the seat of all three branches of the government of India.",
+    "optionA": "Mumbai",
+    "optionB": "Chennai",
+    "optionC": "Delhi",
+    "optionD": "Kolkata",
+    "mediaUrl": "https://youtu.be/N9Hz5iOV4PY"
+  },
+  "Mexico": {
+    "title": "Mexico",
+    "question": "Which country is known for ancient Aztec and Mayan civilizations?",
+    "description": "Mexico is a country in the southern portion of North America, rich in history, culture, and biodiversity.",
+    "details": "It’s known for its vibrant traditions, cuisine, and ancient ruins like Chichen Itza and Teotihuacan.",
+    "optionA": "Peru",
+    "optionB": "Mexico",
+    "optionC": "Brazil",
+    "optionD": "Colombia",
+    "mediaUrl": "test.jpg"
+  }
+}

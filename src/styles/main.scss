@@ -191,6 +191,7 @@ body {
   justify-content: flex-start;
   background: white;
   border-radius: 10px;
+  top: 5%;
   padding: 2%;
   max-width: 75%;
   max-height: 80%;
@@ -556,7 +557,6 @@ body {
   }
 }
 
-/* Mobile adjustments */
 @media (max-width: 600px) {
   .menu-bar {
     height: 45px;
@@ -615,11 +615,26 @@ body {
   }
 
   .title {
-    font-size: 1rem;
+    font-size: 0.79rem;
+    border-radius: 5px;
+  }
+
+  #touchSwipeHint {
+    width: 50%;
+    max-width: 55%;
+  }
+
+  #touchSwipeHint img {
+    width: 35px;
+    height: 35px;
+  }
+
+  #touchSwipeHint span {
+    font-size: calc(0.75rem + 0.5vw);
   }
 
   .menu-bar.expanded .title {
-    font-size: calc(1.2rem + 1vw);
+    font-size: calc(1rem + 1vw);
   }
 
   .sidebar-icons button {
@@ -630,13 +645,90 @@ body {
   .language-selector {
     min-width: 25%;
     min-height: 20%;
-    max-width: 50%;
-    max-height: 40%;
+    max-width: 60%;
+    max-height: 50%;
   }
 
   .language-option {
     padding: 10px 14px;
     font-size: 14px;
+  }
+
+  .info-container {
+    display: flex;
+    flex-direction: row; /* <-- THIS is important */
+    width: 65%;
+    min-height: 30%;
+    max-height: 400px;
+    height: auto;
+  }
+
+  .info-menu {
+    width: 25%;
+    border-right: 1px solid #ccc;
+    padding-right: 5px;
+  }
+
+  .info-menu button {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .info-menu button.active {
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+
+  .info-content {
+    flex: 1;
+    margin-left: 2%;
+    font-size: 2vw;
+    overflow-y: auto;
+    max-height: 400px;
+  }
+
+  .overlay-content,
+  .sphere-content {   
+    height: auto;
+    min-width: 80%;
+    max-width: 90%;
+    min-height: 500px;
+    max-height: auto;
+  }
+
+  .sphere-content h1 {
+    font-size: 4vw;
+  }
+
+  .sphere-content .content {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: auto;
+    width: auto;
+  }
+
+  .sphere-content .text {
+    flex: 0 0 100%;
+    width: 100%;
+    overflow-wrap: break-word;
+    height: 100%;
+    line-height: 3.5vw;
+  }
+
+  .sphere-content .content .text p {
+    font-size: calc(0.7rem + 0.75vw); /* Dynamic font size for content text */
+  }
+
+  .sphere-content .buttons button {
+    margin: 5px;
+    width: 100px;
   }
 }
 

@@ -9,6 +9,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "ios-webkit-debug-proxy": "^0.0.3",
     "three": "^0.160.0",
     "vue": "^3.4.0"
   },
